@@ -172,7 +172,7 @@ class _ManualFindingSheetState extends State<_ManualFindingSheet> {
           const SizedBox(height: 16),
           TextField(controller: name, autofocus: true, decoration: const InputDecoration(labelText: 'Bezeichnung', border: OutlineInputBorder())),
           const SizedBox(height: 12),
-          DropdownButtonFormField<FindingType>(value: type, decoration: const InputDecoration(labelText: 'Gerätetyp', border: OutlineInputBorder()), items: FindingType.values.where((e) => e != FindingType.notice).map((e) => DropdownMenuItem(value: e, child: Text(_typeName(e)))).toList(), onChanged: (value) => setState(() => type = value ?? type)),
+          DropdownButtonFormField<FindingType>(initialValue: type, decoration: const InputDecoration(labelText: 'Gerätetyp', border: OutlineInputBorder()), items: FindingType.values.where((e) => e != FindingType.notice).map((e) => DropdownMenuItem(value: e, child: Text(_typeName(e)))).toList(), onChanged: (value) => setState(() => type = value ?? type)),
           const SizedBox(height: 16),
           FilledButton(onPressed: () => Navigator.of(context).pop(Finding(id: const Uuid().v4(), name: name.text.trim().isEmpty ? _typeName(type) : name.text.trim(), type: type, risk: [FindingType.camera, FindingType.microphone, FindingType.speaker].contains(type) ? RiskLevel.high : RiskLevel.medium, confidence: .90, reason: 'Das Gerät wurde bei der Sichtprüfung manuell erfasst.', source: 'Sichtprüfung')), child: const Text('Hinzufügen')),
         ]),
