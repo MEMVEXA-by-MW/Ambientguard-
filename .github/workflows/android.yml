@@ -26,7 +26,11 @@ jobs:
           cache: true
 
       - name: Complete generated platform files
-        run: flutter create --platforms=android --org de.ambientguard --project-name ambientguard .
+        run: |
+          cp android/app/build.gradle.kts /tmp/ambientguard-app-build.gradle.kts
+          flutter create --platforms=android --org de.ambientguard --project-name ambientguard .
+          cp /tmp/ambientguard-app-build.gradle.kts android/app/build.gradle.kts
+        
 
       - name: Dependencies
         run: flutter pub get
