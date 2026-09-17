@@ -29,6 +29,7 @@ jobs:
         run: |
           cp android/app/build.gradle.kts /tmp/ambientguard-app-build.gradle.kts
           flutter create --platforms=android --org de.ambientguard --project-name ambientguard .
+          cp -R android/src/main/. android/app/src/main/
           cp /tmp/ambientguard-app-build.gradle.kts android/app/build.gradle.kts
         
 
