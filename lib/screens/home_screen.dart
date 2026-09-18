@@ -101,7 +101,11 @@ class _Dashboard extends StatelessWidget {
         Text('So funktioniert es', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 12),
         const _Step(icon: Icons.camera_alt_outlined, title: 'Sichtprüfung', text: 'Kameraansicht nutzen und auffällige Geräte dokumentieren.'),
-        const _Step(icon: Icons.bluetooth_searching, title: 'Funksignale', text: 'Bluetooth-Geräte in der unmittelbaren Umgebung erfassen.'),
+        const _Step(
+  icon: Icons.wifi_tethering,
+  title: 'Funksignale',
+  text: 'Bluetooth-Geräte in der Umgebung und erreichbare Geräte im verbundenen WLAN erfassen.',
+),
         const _Step(icon: Icons.qr_code_scanner, title: 'Datenschutz-Hinweis', text: 'QR-Code des Raums einlesen und mit Beobachtungen abgleichen.'),
         const SizedBox(height: 16),
         Card(
