@@ -16,37 +16,45 @@ class AmbientGuardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AmbientGuard',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeListResolutionCallback: (
-        deviceLocales,
-        supportedLocales,
-      ) {
-        if (deviceLocales != null) {
-          for (final deviceLocale in deviceLocales) {
-            for (final supportedLocale in supportedLocales) {
-              if (deviceLocale.languageCode ==
-                  supportedLocale.languageCode) {
-                return supportedLocale;
+    return AnimatedBuilder(
+      animation: state,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'AmbientGuard',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.system,
+          locale: state.locale,
+          supportedLocales:
+              AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeListResolutionCallback: (
+            deviceLocales,
+            supportedLocales,
+          ) {
+            if (deviceLocales != null) {
+              for (final deviceLocale in deviceLocales) {
+                for (final supportedLocale
+                    in supportedLocales) {
+                  if (deviceLocale.languageCode ==
+                      supportedLocale.languageCode) {
+                    return supportedLocale;
+                  }
+                }
               }
             }
-          }
-        }
 
-        return const Locale('en');
+            return const Locale('en');
+          },
+          home: HomeScreen(state: state),
+        );
       },
-      home: HomeScreen(state: state),
     );
   }
 }
