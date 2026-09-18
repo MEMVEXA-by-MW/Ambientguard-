@@ -30,7 +30,9 @@ jobs:
           cp android/app/build.gradle.kts /tmp/ambientguard-app-build.gradle.kts
           flutter create --platforms=android --org de.ambientguard --project-name ambientguard .
           cp -R android/src/main/. android/app/src/main/
+          find android/app/src/main -name 'platzhalter.txt' -delete
           cp /tmp/ambientguard-app-build.gradle.kts android/app/build.gradle.kts
+          
         
 
       - name: Dependencies
