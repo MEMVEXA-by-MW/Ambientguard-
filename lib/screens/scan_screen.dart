@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
-
+import '../l10n/scan_translations.dart';
 import '../models/finding.dart';
 import '../models/room_scan.dart';
 import '../services/ble_scanner_service.dart';
@@ -41,108 +41,108 @@ class _ScanScreenState extends State<ScanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  final tr = ScanTranslations(
+    Localizations.localeOf(context).languageCode,
+  );
+
+  return Scaffold(
       appBar: AppBar(
-        title: const Text('Raumprüfung'),
+        title: Text(tr.text('roomCheck')),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           TextField(
             controller: labelController,
-            decoration: const InputDecoration(
-              labelText: 'Bezeichnung',
-              hintText: 'z. B. Hotelzimmer 214',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+  labelText: tr.text('name'),
+  hintText: tr.text('roomHint'),
+  border: const OutlineInputBorder(),
+),
             ),
-          ),
+          
           const SizedBox(height: 16),
           _ActionCard(
-            icon: Icons.visibility_outlined,
-            title: '1. Sichtprüfung',
-            text:
-                'Dokumentiere sichtbare Kameras, Smart Speaker oder Displays. '
-                'Die Bilder werden nicht gespeichert.',
-            button: 'Gerät hinzufügen',
-            onTap: _addVisualFinding,
-          ),
-          _ActionCard(
-            icon: Icons.bluetooth_searching,
-            title: '2. Bluetooth-Umgebung',
-            text: scanning
-                ? 'Suche läuft …'
-                : 'Erfasst ausgestrahlte Gerätenamen und schätzt den '
-                    'möglichen Typ.',
-            button: scanning ? 'Suche läuft' : 'BLE scannen',
-            onTap: scanning ? null : _scanBle,
-          ),
-          _ActionCard(
-            icon: Icons.wifi_find,
-            title: '3. WLAN-/LAN-Geräte',
-            text: networkScanning
-                ? 'Lokales Netzwerk wird geprüft …'
-                : 'Sucht erreichbare Geräte und typische Dienste im '
-                    'aktuell verbundenen WLAN. Nur in eigenen oder '
-                    'freigegebenen Netzwerken verwenden.',
-            button: networkScanning
-                ? 'Suche läuft'
-                : 'Netzwerk scannen',
-            onTap: networkScanning ? null : _scanNetwork,
-          ),
-          _ActionCard(
-            icon: Icons.qr_code_scanner,
-            title: '4. Datenschutz-Hinweis',
-            text: noticeUrl == null
-                ? 'Scanne einen QR-Code des Betreibers.'
-                : 'Hinweis erfasst: $noticeUrl',
-            button: 'QR-Code scannen',
-            onTap: _scanQr,
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Gefundene Hinweise (${findings.length})',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
-          const SizedBox(height: 8),
-          if (findings.isEmpty)
-            const Card(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  'Noch keine Hinweise. Ein fehlender Fund ist kein '
-                  'Beweis für einen sensorfreien Raum.',
-                ),
-              ),
-            )
-          else
-            ...findings.map(
-              (finding) => Card(
-                child: ListTile(
-                  leading: Icon(_icon(finding.type)),
-                  title: Text(finding.name),
-                  subtitle: Text(
-                    '${(finding.confidence * 100).round()} % Konfidenz'
-                    ' · ${finding.source}',
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      setState(() {
-                        findings.remove(finding);
-                      });
-                    },
-                  ),
-                ),
-              ),
-            ),
-          const SizedBox(height: 16),
-          FilledButton.icon(
-            onPressed: _finish,
-            icon: const Icon(Icons.fact_check_outlined),
-            label: const Text('Bewertung erstellen'),
-          ),
+  icon: Icons.visibility_outlined,
+  title: '1. ${tr.text('visualInspection')}',
+  text: tr.text('visualDescription'),
+  button: tr.text('addDevice'),
+  onTap: _addVisualFinding,
+),
+_ActionCard(
+  icon: Icons.bluetooth_searching,
+  title: '2. ${tr.text('bluetoothEnvironment')}',
+  text: scanning
+      ? tr.text('bluetoothScanning')
+      : tr.text('bluetoothDescription'),
+  button: scanning
+      ? tr.text('bluetoothScanning')
+      : tr.text('scanBluetooth'),
+  onTap: scanning ? null : _scanBle,
+),
+_ActionCard(
+  icon: Icons.wifi_find,
+  title: '3. ${tr.text('networkDevices')}',
+  text: networkScanning
+      ? tr.text('networkScanning')
+      : tr.text('networkDescription'),
+  button: networkScanning
+      ? tr.text('networkScanning')
+      : tr.text('scanNetwork'),
+  onTap: networkScanning ? null : _scanNetwork,
+),
+_ActionCard(
+  icon: Icons.qr_code_scanner,
+  title: '4. ${tr.text('privacyNotice')}',
+  text: noticeUrl == null
+      ? tr.text('privacyDescription')
+      : tr.text('qrCaptured'),
+  button: tr.text('scanQrCode'),
+  onTap: _scanNotice,
+),
+const SizedBox(height: 12),
+Text(
+  tr.text('foundFindings', count: findings.length),
+  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+),
+const SizedBox(height: 8),
+if (findings.isEmpty)
+  Card(
+    child: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Text(tr.text('noFindings')),
+    ),
+  )
+else
+  ...findings.map(
+    (finding) => Card(
+      child: ListTile(
+        leading: Icon(_icon(finding.type)),
+        title: Text(finding.name),
+        subtitle: Text(
+          '${(finding.confidence * 100).round()}% '
+          '${tr.text('confidence')}\n'
+          '${finding.source}',
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            setState(() {
+              findings.remove(finding);
+            });
+          },
+        ),
+      ),
+    ),
+  ),
+const SizedBox(height: 16),
+FilledButton.icon(
+  onPressed: _finish,
+  icon: const Icon(Icons.fact_check_outlined),
+  label: Text(tr.text('createAssessment')),
+),
         ],
       ),
     );
