@@ -98,7 +98,7 @@ _ActionCard(
       ? tr.text('privacyDescription')
       : tr.text('qrCaptured'),
   button: tr.text('scanQrCode'),
-  onTap: _scanNotice,
+  onTap: _scanQr,
 ),
 const SizedBox(height: 12),
 Text(
