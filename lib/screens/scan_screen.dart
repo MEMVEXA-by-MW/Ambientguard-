@@ -368,6 +368,9 @@ class _ManualFindingSheetState
 
   @override
   Widget build(BuildContext context) {
+    final tr = ScanTranslations(
+  Localizations.localeOf(context).languageCode,
+);
     return Padding(
       padding: EdgeInsets.fromLTRB(
         20,
@@ -380,7 +383,7 @@ class _ManualFindingSheetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sichtbaren Hinweis erfassen',
+            tr.text('manualFinding'),
             style:
                 Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w800,
@@ -390,18 +393,18 @@ class _ManualFindingSheetState
           TextField(
             controller: name,
             autofocus: true,
-            decoration: const InputDecoration(
-              labelText: 'Bezeichnung',
-              border: OutlineInputBorder(),
-            ),
+            decoration: InputDecoration(
+  labelText: tr.text('deviceName'),
+  border: const OutlineInputBorder(),
+),
           ),
           const SizedBox(height: 12),
           DropdownButtonFormField<FindingType>(
             initialValue: type,
-            decoration: const InputDecoration(
-              labelText: 'Gerätetyp',
-              border: OutlineInputBorder(),
-            ),
+            decoration: InputDecoration(
+  labelText: tr.text('deviceType'),
+  border: const OutlineInputBorder(),
+),
             items: FindingType.values
                 .where(
                   (item) => item != FindingType.notice,
@@ -409,7 +412,7 @@ class _ManualFindingSheetState
                 .map(
                   (item) => DropdownMenuItem(
                     value: item,
-                    child: Text(_typeName(item)),
+                    child: Text(_typeName(item, tr)),
                   ),
                 )
                 .toList(),
@@ -434,19 +437,17 @@ class _ManualFindingSheetState
                 Finding(
                   id: const Uuid().v4(),
                   name: name.text.trim().isEmpty
-                      ? _typeName(type)
+                      ? _typeName(type, tr)
                       : name.text.trim(),
                   type: type,
                   risk: risk,
                   confidence: 0.90,
-                  reason:
-                      'Das Gerät wurde bei der Sichtprüfung '
-                      'manuell erfasst.',
-                  source: 'Sichtprüfung',
+                  reason: tr.text('manualReason'),
+source: tr.text('manualSource'),
                 ),
               );
             },
-            child: const Text('Hinzufügen'),
+            child: Text(tr.text('add')),
           ),
         ],
       ),
@@ -468,9 +469,12 @@ class _QrScannerState extends State<_QrScanner> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = ScanTranslations(
+  Localizations.localeOf(context).languageCode,
+);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Datenschutz-QR scannen'),
+        title: Text(tr.text('qrScanner')),
       ),
       body: MobileScanner(
         onDetect: (capture) {
@@ -500,14 +504,14 @@ IconData _icon(FindingType type) {
   };
 }
 
-String _typeName(FindingType type) {
+String _typeName(FindingType type, ScanTranslations tr) {
   return switch (type) {
-    FindingType.camera => 'Kamera',
-    FindingType.microphone => 'Mikrofon',
-    FindingType.speaker => 'Smart Speaker',
-    FindingType.display => 'Display / TV',
-    FindingType.networkDevice => 'Netzwerkgerät',
-    FindingType.notice => 'Datenschutz-Hinweis',
-    FindingType.unknown => 'Unbekanntes Gerät',
+    FindingType.camera => tr.text('camera'),
+    FindingType.microphone => tr.text('microphone'),
+    FindingType.speaker => tr.text('smartSpeaker'),
+    FindingType.display => tr.text('displayTv'),
+    FindingType.networkDevice => tr.text('networkDevice'),
+    FindingType.notice => tr.text('privacyCode'),
+    FindingType.unknown => tr.text('unknown'),
   };
 }
