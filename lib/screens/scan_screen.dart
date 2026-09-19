@@ -9,6 +9,7 @@ import '../services/ble_scanner_service.dart';
 import '../services/network_scanner_service.dart';
 import '../state/app_state.dart';
 import 'scan_detail_screen.dart';
+import 'wifi_environment_screen.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({
@@ -83,7 +84,20 @@ _ActionCard(
 ),
 _ActionCard(
   icon: Icons.wifi_find,
-  title: '3. ${tr.text('networkDevices')}',
+  title: '3. ${tr.text('wifiEnvironment')}',
+  text: tr.text('wifiEnvironmentDescription'),
+  button: tr.text('openWifiEnvironment'),
+  onTap: () {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const WifiEnvironmentScreen(),
+      ),
+    );
+  },
+),
+_ActionCard(
+  icon: Icons.wifi_find,
+  title: '4. ${tr.text('networkDevices')}',
   text: networkScanning
       ? tr.text('networkScanning')
       : tr.text('networkDescription'),
@@ -94,7 +108,7 @@ _ActionCard(
 ),
 _ActionCard(
   icon: Icons.qr_code_scanner,
-  title: '4. ${tr.text('privacyNotice')}',
+  title: '5. ${tr.text('privacyNotice')}',
   text: noticeUrl == null
       ? tr.text('privacyDescription')
       : tr.text('qrCaptured'),
