@@ -23,15 +23,16 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  final labelController = TextEditingController(
-    text: 'Neuer Raum',
-  );
+  final labelController = TextEditingController();
 
   final findings = <Finding>[];
 
   bool scanning = false;
   bool networkScanning = false;
   String? noticeUrl;
+  ScanTranslations get _tr => ScanTranslations(
+      Localizations.localeOf(context).languageCode,
+    );
 
   @override
   void dispose() {
@@ -160,7 +161,7 @@ FilledButton.icon(
     );
 
     if (!allowed) {
-      _message('Bluetooth-Berechtigung wurde nicht erteilt.');
+      _message(_tr.text('permissionDenied'));
       return;
     }
 
@@ -181,11 +182,9 @@ FilledButton.icon(
         );
       });
 
-      _message('${results.length} Bluetooth-Hinweise erfasst.');
+      _message(_tr.text('bluetoothFound', count: results.length));
     } catch (_) {
-      _message(
-        'Bluetooth-Suche konnte nicht abgeschlossen werden.',
-      );
+      _message(_tr.text('bluetoothFailed'));
     } finally {
       if (mounted) {
         setState(() {
@@ -214,20 +213,14 @@ FilledButton.icon(
       });
 
       if (results.isEmpty) {
-        _message(
-          'Keine Geräte mit erkennbaren Diensten gefunden.',
-        );
+        _message(_tr.text('networkNone'));
       } else {
-        _message(
-          '${results.length} Netzwerkgeräte erfasst.',
-        );
+        _message(_tr.text('networkFound', count: results.length));
       }
-    } on NetworkScanException catch (error) {
-      _message(error.message);
+    } on NetworkScanException {
+  _message(_tr.text('networkUnavailable'));
     } catch (_) {
-      _message(
-        'Der Netzwerk-Scan konnte nicht abgeschlossen werden.',
-      );
+      _message(_tr.text('networkFailed'));
     } finally {
       if (mounted) {
         setState(() {
@@ -269,7 +262,7 @@ FilledButton.icon(
     final scan = RoomScan(
       id: const Uuid().v4(),
       label: labelController.text.trim().isEmpty
-          ? 'Unbenannter Raum'
+          ? _tr.text('unnamedRoom')
           : labelController.text.trim(),
       createdAt: DateTime.now(),
       findings: List.unmodifiable(findings),
