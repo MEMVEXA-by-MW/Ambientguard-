@@ -35,6 +35,9 @@ class ScanTranslations {
           'Bluetooth-Geräte in der unmittelbaren Umgebung erfassen.',
       'scanBluetooth': 'Bluetooth scannen',
       'bluetoothScanning': 'Bluetooth wird gescannt …',
+      'wifiEnvironment': 'WLAN-Umgebung',
+'wifiEnvironmentDescription': 'Sichtbare WLAN-Netzwerke in der Umgebung erfassen. Eine Verbindung ist nicht erforderlich.',
+'openWifiEnvironment': 'WLAN-Umgebung scannen',
       'networkDevices': 'WLAN-/LAN-Geräte',
       'networkDescription':
           'Erreichbare Geräte im verbundenen eigenen Netzwerk suchen.',
@@ -90,6 +93,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Detect nearby Bluetooth devices.',
       'scanBluetooth': 'Scan Bluetooth',
       'bluetoothScanning': 'Scanning Bluetooth …',
+      'wifiEnvironment': 'Wi-Fi environment',
+'wifiEnvironmentDescription': 'Detect visible Wi-Fi networks nearby. No connection is required.',
+'openWifiEnvironment': 'Scan Wi-Fi environment',
       'networkDevices': 'Wi-Fi/LAN devices',
       'networkDescription':
           'Find reachable devices in your connected private network.',
@@ -145,6 +151,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Detecta dispositivos Bluetooth cercanos.',
       'scanBluetooth': 'Escanear Bluetooth',
       'bluetoothScanning': 'Escaneando Bluetooth …',
+      'wifiEnvironment': 'Entorno Wi-Fi',
+'wifiEnvironmentDescription': 'Detecta redes Wi-Fi visibles cercanas. No es necesario conectarse.',
+'openWifiEnvironment': 'Escanear entorno Wi-Fi',
       'networkDevices': 'Dispositivos Wi-Fi/LAN',
       'networkDescription':
           'Busca dispositivos accesibles en tu red privada.',
@@ -199,6 +208,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Détectez les appareils Bluetooth proches.',
       'scanBluetooth': 'Scanner le Bluetooth',
       'bluetoothScanning': 'Analyse Bluetooth en cours …',
+      'wifiEnvironment': 'Environnement Wi-Fi',
+'wifiEnvironmentDescription': 'Détecte les réseaux Wi-Fi visibles à proximité. Aucune connexion requise.',
+'openWifiEnvironment': 'Analyser les réseaux Wi-Fi',
       'networkDevices': 'Appareils Wi-Fi/LAN',
       'networkDescription':
           'Recherchez les appareils accessibles sur votre réseau privé.',
@@ -252,6 +264,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Rileva i dispositivi Bluetooth vicini.',
       'scanBluetooth': 'Scansiona Bluetooth',
       'bluetoothScanning': 'Scansione Bluetooth …',
+      'wifiEnvironment': 'Ambiente Wi-Fi',
+'wifiEnvironmentDescription': 'Rileva le reti Wi-Fi visibili nelle vicinanze. Non è richiesta una connessione.',
+'openWifiEnvironment': 'Scansiona reti Wi-Fi',
       'networkDevices': 'Dispositivi Wi-Fi/LAN',
       'networkDescription':
           'Trova i dispositivi raggiungibili nella tua rete privata.',
@@ -305,6 +320,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Detete dispositivos Bluetooth próximos.',
       'scanBluetooth': 'Procurar Bluetooth',
       'bluetoothScanning': 'A procurar dispositivos Bluetooth …',
+      'wifiEnvironment': 'Ambiente Wi-Fi',
+'wifiEnvironmentDescription': 'Detecta redes Wi-Fi visíveis nas proximidades. Não é necessário conectar.',
+'openWifiEnvironment': 'Analisar redes Wi-Fi',
       'networkDevices': 'Dispositivos Wi-Fi/LAN',
       'networkDescription':
           'Procure dispositivos acessíveis na sua rede privada.',
@@ -358,6 +376,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Detecteer Bluetooth-apparaten in de buurt.',
       'scanBluetooth': 'Bluetooth scannen',
       'bluetoothScanning': 'Bluetooth wordt gescand …',
+      'wifiEnvironment': 'Wi-Fi-omgeving',
+'wifiEnvironmentDescription': 'Detecteert zichtbare Wi-Fi-netwerken in de omgeving. Verbinding is niet nodig.',
+'openWifiEnvironment': 'Wi-Fi-omgeving scannen',
       'networkDevices': 'Wifi-/LAN-apparaten',
       'networkDescription':
           'Zoek bereikbare apparaten in je privénetwerk.',
@@ -410,6 +431,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Wykryj pobliskie urządzenia Bluetooth.',
       'scanBluetooth': 'Skanuj Bluetooth',
       'bluetoothScanning': 'Skanowanie Bluetooth …',
+      'wifiEnvironment': 'Otoczenie Wi-Fi',
+'wifiEnvironmentDescription': 'Wykrywa widoczne sieci Wi-Fi w pobliżu. Połączenie nie jest wymagane.',
+'openWifiEnvironment': 'Skanuj otoczenie Wi-Fi',
       'networkDevices': 'Urządzenia Wi-Fi/LAN',
       'networkDescription':
           'Znajdź dostępne urządzenia w swojej prywatnej sieci.',
@@ -463,6 +487,9 @@ class ScanTranslations {
       'bluetoothDescription': 'Yakındaki Bluetooth cihazlarını algılayın.',
       'scanBluetooth': 'Bluetooth tara',
       'bluetoothScanning': 'Bluetooth taranıyor …',
+      'wifiEnvironment': 'Wi-Fi ortamı',
+'wifiEnvironmentDescription': 'Çevredeki görünür Wi-Fi ağlarını algılar. Bağlantı gerekmez.',
+'openWifiEnvironment': 'Wi-Fi ortamını tara',
       'networkDevices': 'Wi-Fi/LAN cihazları',
       'networkDescription':
           'Özel ağınızdaki erişilebilir cihazları bulun.',
